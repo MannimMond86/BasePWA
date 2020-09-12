@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+.drawer-option {
+  padding: 16px;
+}
+
+.enable-notifications {
+  display: none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
