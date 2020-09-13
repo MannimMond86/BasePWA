@@ -13,7 +13,7 @@ var imagePickerArea = document.querySelector('#pick-image');
 var picture;
 var locationBtn = document.querySelector('#location-btn');
 var locationLoader = document.querySelector('#location-loader');
-var fetchedLocation = {lat: 0, lng: 0};
+var fetchedLocation = { lat: 0, lng: 0 };
 
 locationBtn.addEventListener('click', function (event) {
   if (!('geolocation' in navigator)) {
@@ -27,8 +27,8 @@ locationBtn.addEventListener('click', function (event) {
   navigator.geolocation.getCurrentPosition(function (position) {
     locationBtn.style.display = 'inline';
     locationLoader.style.display = 'none';
-    fetchedLocation = {lat: position.coords.latitude, lng: 0};
-    locationInput.value = 'In Munich';
+    fetchedLocation = { lat: position.coords.latitude, lng: 0 };
+    locationInput.value = 'FH Kiel';
     document.querySelector('#manual-location').classList.add('is-focused');
   }, function (err) {
     console.log(err);
@@ -38,8 +38,8 @@ locationBtn.addEventListener('click', function (event) {
       alert('Couldn\'t fetch location, please enter manually!');
       sawAlert = true;
     }
-    fetchedLocation = {lat: 0, lng: 0};
-  }, {timeout: 7000});
+    fetchedLocation = { lat: 0, lng: 0 };
+  }, { timeout: 7000 });
 });
 
 function initializeLocation() {
@@ -67,7 +67,7 @@ function initializeMedia() {
     }
   }
 
-  navigator.mediaDevices.getUserMedia({video: true})
+  navigator.mediaDevices.getUserMedia({ video: true })
     .then(function (stream) {
       videoPlayer.srcObject = stream;
       videoPlayer.style.display = 'block';
@@ -157,7 +157,7 @@ function onSaveButtonClicked(event) {
     caches.open('user-requested')
       .then(function (cache) {
         cache.add('https://httpbin.org/get');
-        cache.add('/src/images/sf-boat.jpg');
+        cache.add('..public/src/images/sf-boat.jpg');
       });
   }
 }
@@ -274,7 +274,7 @@ form.addEventListener('submit', function (event) {
           })
           .then(function () {
             var snackbarContainer = document.querySelector('#confirmation-toast');
-            var data = {message: 'Your Post was saved for syncing!'};
+            var data = { message: 'Your Post was saved for syncing!' };
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
           })
           .catch(function (err) {
