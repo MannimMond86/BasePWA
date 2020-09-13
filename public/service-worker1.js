@@ -1,11 +1,21 @@
+// This optional code is used to register a service worker.
+// register() is not called by default.
 
+// This lets the app load faster on subsequent visits in production, and gives
+// it offline capabilities. However, it also means that developers (and users)
+// will only see deployed updates on subsequent visits to a page, after all the
+// existing tabs open on the page have been closed, since previously cached
+// resources are updated in the background.
 
+// To learn more about the benefits of this model and instructions on how to
+// opt-in, read https://bit.ly/CRA-PWA
 
 importScripts('../public/workbox-sw.prod.v2.0.0.js');
-importScripts('../public//src/js/idb.js');
-importScripts('../public/src/js/utility.js');
+importScripts('../public/src/js/idb.js');
+importScripts('..public/src/js/utility.js');
 
 const workboxSW = new self.WorkboxSW();
+
 
 workboxSW.router.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/, workboxSW.strategies.staleWhileRevalidate({
   cacheName: 'google-fonts',
@@ -66,7 +76,80 @@ workboxSW.router.registerRoute(function (routeData) {
     })
 });
 
-workboxSW.precache([]);
+workboxSW.precache([
+  {
+    "url": "favicon.ico",
+    "revision": "2cab47d9e04d664d93c8d91aec59e812"
+  },
+  {
+    "url": "index.html",
+    "revision": "b30611fae824ce157912d7f356879eaa"
+  },
+  {
+    "url": "manifest.json",
+    "revision": "d11c7965f5cfba711c8e74afa6c703d7"
+  },
+  {
+    "url": "offline.html",
+    "revision": "45352e71a80a5c75d25e226e7330871b"
+  },
+  {
+    "url": "src/css/app.css",
+    "revision": "f27b4d5a6a99f7b6ed6d06f6583b73fa"
+  },
+  {
+    "url": "src/css/index.css",
+    "revision": "edb6851fd7f76aec67d4ca36a09b166d"
+  },
+  {
+    "url": "src/css/help.css",
+    "revision": "1c6d81b27c9d423bece9869b07a7bd73"
+  },
+  {
+    "url": "src/images/main-image-lg.jpg",
+    "revision": "31b19bffae4ea13ca0f2178ddb639403"
+  },
+  {
+    "url": "src/images/main-image-sm.jpg",
+    "revision": "c6bb733c2f39c60e3c139f814d2d14bb"
+  },
+  {
+    "url": "src/images/main-image.jpg",
+    "revision": "5c66d091b0dc200e8e89e56c589821fb"
+  },
+  {
+    "url": "src/images/sf-boat.jpg",
+    "revision": "0f282d64b0fb306daf12050e812d6a19"
+  },
+  {
+    "url": "src/js/app.min.js",
+    "revision": "79ce2f9476d47d787698647062b23c4c"
+  },
+  {
+    "url": "src/js/index.min.js",
+    "revision": "295b95f2ceac4e38914184cafed5723f"
+  },
+  {
+    "url": "src/js/fetch.min.js",
+    "revision": "8e4af7513729aab7f021bef839d0fd6d"
+  },
+  {
+    "url": "src/js/idb.min.js",
+    "revision": "c8bd728048f3f43ad288ffc84d13a57d"
+  },
+  {
+    "url": "src/js/material.min.js",
+    "revision": "713af0c6ce93dbbce2f00bf0a98d0541"
+  },
+  {
+    "url": "src/js/promise.min.js",
+    "revision": "b25b0687e188f1777a154363d093e816"
+  },
+  {
+    "url": "src/js/utility.min.js",
+    "revision": "cb94c3608146875801c35b8e4ef2d36a"
+  }
+]);
 
 self.addEventListener('sync', function (event) {
   console.log('[Service Worker] Background syncing', event);

@@ -4,8 +4,8 @@
   "author": "Tjark Ziehm",
   "license": "MIT",
   "private": true,
-  "description": "A complete guide to PWAs. Building a simple Instagram clone.",
-  "main": "../public/index.js",
+  "description": "Non-profit Research APP from University of  applied sciences Kiel",
+  "main": "public/index.js",
   "keywords": [
     "pwa",
     "progressive",
@@ -14,6 +14,15 @@
     "complete",
     "tutorial"
   ],
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
+    "start-server": "http-server -c-1",
+    "minify": "uglifyjs public/src/js/app.js -o public/src/js/app.min.js --compress --mangle && uglifyjs public/src/js/feed.js -o public/src/js/feed.min.js --compress --mangle && uglifyjs public/src/js/fetch.js -o public/src/js/fetch.min.js --compress --mangle && uglifyjs public/src/js/idb.js -o public/src/js/idb.min.js --compress --mangle && uglifyjs public/src/js/promise.js -o public/src/js/promise.min.js --compress --mangle && uglifyjs public/src/js/utility.js -o public/src/js/utility.min.js --compress --mangle",
+    "generate-sw": "workbox inject:manifest",
+    "build-mini": "npm run minify && npm run generate-sw"
+  },
   "dependencies": {
     "@babel/core": "latest",
     "@svgr/webpack": "latest",
@@ -81,15 +90,6 @@
     "workbox-cli": "latest",
     "workbox-webpack-plugin": "latest"
   },
-  "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "start-server": "http-server -c-1",
-    "minify": "uglifyjs public/src/js/app.js -o public/src/js/app.min.js --compress --mangle && uglifyjs public/src/js/feed.js -o public/src/js/feed.min.js --compress --mangle && uglifyjs public/src/js/fetch.js -o public/src/js/fetch.min.js --compress --mangle && uglifyjs public/src/js/idb.js -o public/src/js/idb.min.js --compress --mangle && uglifyjs public/src/js/promise.js -o public/src/js/promise.min.js --compress --mangle && uglifyjs public/src/js/utility.js -o public/src/js/utility.min.js --compress --mangle",
-    "generate-sw": "workbox inject:manifest",
-    "build-mini": "npm run minify && npm run generate-sw"
-  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -107,21 +107,21 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/public/src"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "public/src/**/*.{js,jsx,ts,tsx}",
+      "!public/src/**/*.d.ts"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
+      "<rootDir>/public/src/setupTests.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      "<rootDir>/public/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/public/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jest-environment-jsdom-fourteen",
     "transform": {
@@ -168,7 +168,7 @@
   "devDependencies": {
     "http-server": "latest",
     "install-peers": "latest",
-    "uglify-js": "^3.10.4",
+    "uglify-js": "latest",
     "workbox-cli": "latest"
   }
 }

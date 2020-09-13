@@ -8,16 +8,16 @@ if (!window.Promise) {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/service-worker.js')
+    .register('../public/service-worker.js')
     .then(function () {
-      console.log('Service worker registered!');
+      console.log('[ServiceWorker]I am registered!');
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 }
 
-window.addEventListener('beforeinstallprompt', function(event) {
+window.addEventListener('beforeinstallprompt', function (event) {
   console.log('beforeinstallprompt fired');
   event.preventDefault();
   deferredPrompt = event;
@@ -28,12 +28,12 @@ function displayConfirmNotification() {
   if ('serviceWorker' in navigator) {
     var options = {
       body: 'You successfully subscribed to our Notification service!',
-      icon: '/src/images/icons/app-icon-96x96.png',
-      image: '/src/images/sf-boat.jpg',
+      icon: '../public/src/images/icons/app-icon-96x96.png',
+      image: '../public/src/images/sf-boat.jpg',
       dir: 'ltr',
       lang: 'en-US', // BCP 47,
       vibrate: [100, 50, 200],
-      badge: '/src/images/icons/app-icon-96x96.png',
+      badge: '../public/src/images/icons/app-icon-96x96.png',
       tag: 'confirm-notification',
       renotify: true,
       actions: [
@@ -43,7 +43,7 @@ function displayConfirmNotification() {
     };
 
     navigator.serviceWorker.ready
-      .then(function(swreg) {
+      .then(function (swreg) {
         swreg.showNotification('Successfully subscribed!', options);
       });
   }
@@ -56,11 +56,11 @@ function configurePushSub() {
 
   var reg;
   navigator.serviceWorker.ready
-    .then(function(swreg) {
+    .then(function (swreg) {
       reg = swreg;
       return swreg.pushManager.getSubscription();
     })
-    .then(function(sub) {
+    .then(function (sub) {
       if (sub === null) {
         // Create a new subscription
         var vapidPublicKey = 'BKapuZ3XLgt9UZhuEkodCrtnfBo9Smo-w1YXCIH8YidjHOFAU6XHpEnXefbuYslZY9vtlEnOAmU7Mc-kWh4gfmE';
@@ -73,7 +73,7 @@ function configurePushSub() {
         // We have a subscription
       }
     })
-    .then(function(newSub) {
+    .then(function (newSub) {
       return fetch('https://pwagram-99adf.firebaseio.com/subscriptions.json', {
         method: 'POST',
         headers: {
@@ -83,18 +83,18 @@ function configurePushSub() {
         body: JSON.stringify(newSub)
       })
     })
-    .then(function(res) {
+    .then(function (res) {
       if (res.ok) {
         displayConfirmNotification();
       }
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 }
 
 function askForNotificationPermission() {
-  Notification.requestPermission(function(result) {
+  Notification.requestPermission(function (result) {
     console.log('User Choice', result);
     if (result !== 'granted') {
       console.log('No notification permission granted!');
