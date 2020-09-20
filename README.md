@@ -17,12 +17,12 @@
   * #### javascript
   * #### serviceworker
   * #### styles  
-### App-EventHandler.js
-### App.test.js
-### Mainpage.html
-### manifest.json
-### robots.txr
-### setupTest.js
+* #### App-EventHandler.js
+* #### App.test.js
+* #### Mainpage.html
+* #### manifest.json
+* #### robots.txr
+* #### setupTest.js
 
 ### scripts
 * ### test
